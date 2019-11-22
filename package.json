@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jswillard/buffwifi/issues"
   },
-  "homepage": "https://github.com/jswillard/buffwifi#readme"
+  "homepage": "https://github.com/jswillard/buffwifi#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
