@@ -32,13 +32,13 @@
       var button = document.getElementById('continue');
       location = getLocation();
       console.log("location");
-      try{
+      //try{
         console.log(document.getElementById("copyLink").getAttribute("data-clipboard-text").split("/")[4]);
         window.location.replace(window.location.href + "results?testId=" + document.getElementById("copyLink").getAttribute("data-clipboard-text").split("/")[4]);
-      }
+      /*}
       catch{
         window.location.replace(window.location.href + "results");
-      }
+      }*/
     }
     </script>
     <div class="text-center">
