@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/jswillard/buffwifi#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "csv-parser": "^2.3.2",
+    "express": "^4.17.1",
+    "node-schedule": "^1.3.2"
   }
 }
