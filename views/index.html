@@ -33,7 +33,7 @@
       location = getLocation();
       console.log("location");
       try{
-        window.location.replace(window.location.href + "/results?testId=" +document.getElementById('copyLink').getAttribute("data-clipboard-text").split("/")[4]);
+        window.location.replace(window.location.href.concat("results?testId=", document.getElementById('copyLink').getAttribute("data-clipboard-text").split("/")[4]));
       }
       catch{
         window.location.replace(window.location.href + "/results");
