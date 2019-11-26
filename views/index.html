@@ -15,7 +15,7 @@
     </div>
     <script>
     var lat,long,acc,alt,alcAcc;
-    var flag = 0;
+    var flag = false;
 
     var options = {
       enableHighAccuracy: true,
@@ -24,18 +24,17 @@
     };
 
     function success(pos) {
-      flag = 1;
+      flag = true;
       var crd = pos.coords;
 
       lat = crd.latitude;
       long = crd.longitude;
       acc = crd.accuracy;
-      flag = 2;
     }
 
     function error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
-      flag = 0;
+      flag = false;
     }
 
     var observer = new MutationObserver(function (mutations) {
@@ -49,25 +48,16 @@
     observer.observe(div, {childList: true});
     navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
-      console.log("Getting Results");
-      console.log(document.getElementById("speedtest"));
-      console.log(document.getElementById('copyLink'));
-      if(flag == 2){
-        console.log(document.getElementById('copyLink'));
-        var copyLink = document.getElementById('copyLink');
-        if (copyLink != null){
-          //window.location.replace(window.location.href + "results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
-        }
-        else{
-          //window.location.replace(window.location.href + "results");
-        }
-      }
-      else if (flag == 1){
-        document.getElementById("locationCheck").innerHTML = "Waiting for location results";
-      }
-      else {
+      if (flag == false){
         document.getElementById("locationCheck").innerHTML = "Please accept location permission to continue";
         navigator.geolocation.getCurrentPosition(success, error, options);
+        return;
+      }
+      var htmlContents = document.documentElement.outerHTML;
+      var idIndex = htmlContents.search("speedtestcustom.com/results") + 27;
+      if (idIndex > 100) {
+        var testId = htmlContents.slice(idIndex, idIndex + 36);
+        window.location.replace(window.loaction.href + "results?testId=" + testId);
       }
     }
     </script>
