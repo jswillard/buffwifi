@@ -39,7 +39,8 @@
     navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
       if(flag == 2){
-        var copyLink = document.getElementById("copyLink");
+        console.log(document.getElementById('copyLink'));
+        var copyLink = document.getElementById('copyLink');
         if (copyLink){
           window.location.replace(window.location.href + "/results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
         }
