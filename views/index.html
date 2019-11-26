@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0 maximum-scale=1.0" />
   <title>CU Boulder WiFi Test</title>
   </head>
-  <body style="width: 100%; height: 100%;">
+  <body id="body" style="width: 100%; height: 100%;">
     <iframe width="100%" height="650px" frameborder="0" src="https://suggesticelettuce.speedtestcustom.com"></iframe>
     <div id="buttonDiv" class="text-center">
       <p id="locationCheck"></p>
@@ -43,7 +43,7 @@
         }
       });
     });
-    var div = document.getElementByTagName("body");
+    var div = document.getElementById("body");
     observer.observe(div, {childList: true});
     navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
