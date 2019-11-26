@@ -36,12 +36,23 @@
       flag = 0;
     }
 
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation){
+        if (mutation.addedNodes.length){
+          console.log(mutation.addedNodes[0]);
+        }
+      });
+    });
+    var div = document.getElementById("buttonDiv");
+    observer.observe(div, {childList: true});
+    var text = document.createElement('p');
+    div.appendChild(text);
     navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
       if(flag == 2){
         console.log(document.getElementById('copyLink'));
         var copyLink = document.getElementById('copyLink');
-        if (copyLink){
+        if (copyLink != null){
           window.location.replace(window.location.href + "/results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
         }
         else{
