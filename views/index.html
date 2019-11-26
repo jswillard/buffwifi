@@ -51,10 +51,10 @@
         console.log(document.getElementById('copyLink'));
         var copyLink = document.getElementById('copyLink');
         if (copyLink != null){
-          window.location.replace(window.location.href + "/results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
+          window.location.replace(window.location.href + "results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
         }
         else{
-          window.location.replace(window.location.href + "/results");
+          window.location.replace(window.location.href + "results");
         }
       }
       else if (flag == 1){
