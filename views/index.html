@@ -7,43 +7,56 @@
   </head>
     <body style="width: 100%; height: 100%;">
     <iframe width="100%" height="650px" frameborder="0" src="https://suggesticelettuce.speedtestcustom.com"></iframe>
-
-    <script>
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
-    }
-    function showPosition(position) {
-      var location = []
-      location.push(position.coords.latitude);
-      location.push(position.coords.longitude);
-      location.push(position.coords.accuracy);
-      location.push(position.coords.altitude);
-      location.push(position.coords.altitudeAccuracy);
-      return location;
-    }
-
-    function getResults(){
-      console.log("on press");
-      var button = document.getElementById('continue');
-      location = getLocation();
-      console.log("location");
-      //try{
-        console.log(document.getElementById("copyLink").getAttribute("data-clipboard-text").split("/")[4]);
-        window.location.replace(window.location.href + "results?testId=" + document.getElementById("copyLink").getAttribute("data-clipboard-text").split("/")[4]);
-      /*}
-      catch{
-        window.location.replace(window.location.href + "results");
-      }*/
-    }
-    </script>
-    <div class="text-center">
-      <a id="contine" class="btn btn-info black-background white" onclick="getResults();" role="button">Continue</a>
+    <div id="buttonDiv" class="text-center">
+      <p id="locationCheck"></p>
+      <button id="contine" class="btn btn-dark" onclick="getResults();" role="button">Continue</button>
     </div>
+    <script>
+    var lat,long,acc,alt,alcAcc;
+    var flag = 0;
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function success(pos) {
+      flag = 1;
+      var crd = pos.coords;
+
+      lat = crd.latitude;
+      long = crd.longitude;
+      acc = crd.accuracy;
+      flag = 2;
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      flag = 0;
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+    function getResults(){
+      if(flag == 2){
+        var copyLink = document.getElementById("copyLink");
+        if (copyLink){
+          window.location.replace(window.location.href + "/results?testId=" + copyLink.getAttribute("data-clipboard-text").split("/")[4]);
+        }
+        else{
+          window.location.replace(window.location.href + "/results");
+        }
+      }
+      else if (flag == 1){
+        document.getElementById("locationCheck").innerHTML = "Waiting for location results";
+      }
+      else {
+        document.getElementById("locationCheck").innerHTML = "Please accept location permission to continue";
+        navigator.geolocation.getCurrentPosition(success, error, options);
+      }
+   }
+
+    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
