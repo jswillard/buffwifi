@@ -6,28 +6,29 @@
   <title>CU Boulder WiFi Test</title>
   </head>
   <body id="body" style="width: 100%; height: 100%;">
-    <div>
+    <div class="text-center">
       <iframe width="100%" height="650px" frameborder="0" id="speedtest" src="https://suggesticelettuce.speedtestcustom.com"></iframe>
+      <div id='results' class='container'>
+        <br>
+        <form action='/results' method="GET">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Download" name="down">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Upload" name="up">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Ping" name="ping">
+            </div>
+          </div>
+          <div>
+            <p id="locationCheck"></p>
+            <input class="btn btn-dark" type="submit">
+          </div>
+        </form>
+      </div>
     </div>
-    <div id='testButton' class='container text-center'>
-      <br>
-      <form action='/results' method="GET">
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Download" name="down">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Upload" name="up">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Ping" name="ping">
-          </div>
-        </div>
-        <div>
-          <p id="locationCheck"></p>
-          <input class="btn btn-dark" type="submit">
-        </div>
-      </form>
     </body>
     <script>
     var lat,long,acc,alt,alcAcc;
