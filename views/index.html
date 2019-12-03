@@ -32,7 +32,7 @@
     </body>
     <script>
     var lat,long,acc,alt,alcAcc;
-    var flag = false;
+    var flag = 0;
 
     var options = {
       enableHighAccuracy: true,
@@ -41,7 +41,7 @@
     };
 
     function success(pos) {
-      flag = true;
+      flag = 1;
       var crd = pos.coords;
 
       lat = crd.latitude;
@@ -49,21 +49,32 @@
       acc = crd.accuracy;
     }
 
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-      flag = false;
+    function error(error) {
+      if (error.code == error.PERMISSION_DENIED) {
+        flag = 2;
+      }
+      else {
+        console.warn(`ERROR(${error.code}): ${error.message}`);
+        flag = 3;
+      }
+
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
-      if (flag == false){
+      if (flag == 1){
         document.getElementById("locationCheck").innerHTML = "<br>Please wait for location data in order to continue";
+        return;
+      }
+      if (flag == 2){
+        document.getElementById("locationCheck").innerHTML = "<br>Please accept location permission in order to continue";
+        navigator.geolocation.getCurrentPosition(success, error, options);
         return;
       }
       var down = document.getElementById('down');
       var up = document.getElementById('up');
       var ping = document.getElementById('ping');
-      
+
       window.location.replace(window.location.href + "results?down=" + down.value + "&up=" + up.value + "&ping=" + ping.value + "&lat=" + lat + "&long=" + long);
 
     }
