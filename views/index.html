@@ -9,10 +9,26 @@
     <div>
       <iframe width="100%" height="650px" frameborder="0" id="speedtest" src="https://suggesticelettuce.speedtestcustom.com"></iframe>
     </div>
-    <div id="buttonDiv" class="text-center">
-      <p id="locationCheck"></p>
-      <button id="contine" class="btn btn-dark" onclick="getResults();" role="button">Continue</button>
-    </div>
+    <div id='testButton' class='container text-center'>
+      <br>
+      <form action='/results' method="GET">
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Download" name="down">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Upload" name="up">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Ping" name="ping">
+          </div>
+        </div>
+        <div>
+          <p id="locationCheck"></p>
+          <input class="btn btn-dark" type="submit">
+        </div>
+      </form>
+    </body>
     <script>
     var lat,long,acc,alt,alcAcc;
     var flag = false;
