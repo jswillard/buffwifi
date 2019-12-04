@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart'], callback: testChart});
+      function testChart()
+      {
+        // Define the chart to be drawn.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Element');
+        data.addColumn('number', 'Percentage');
+        data.addRows([
+          ['Nitrogen', 0.78],
+          ['Oxygen', 0.21],
+          ['Other', 0.01]
+        ]);
+        // set chart options
+        var options = {title: "Test Pie Chart", is3D: true, width:400, height:600};
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.PieChart(document.getElementById('testingPie'));
+        chart.draw(data, options);
+        var data2 = new google.visualization.arrayToDataTable([
+          ['Time', 'Download', 'Upload'],
+          ['4pm',47.62,46.88],
+          ['5pm',50.11,49.12],
+          ['6pm',44.89,45.12],
+          ['7pm',31.32,38.18],
+          ['8pm',35.87,32.77]
+        ]);
+        var options2 = {curveType: 'function', width: 800, height: 900};
+        var chart2 = new google.visualization.LineChart(document.getElementById('lineChart'));
+        chart2.draw(data2, options2);
+      }
+    </script>
+    <title>Test Page</title>
+  </head>
+  <body>
+    <table class="columns">
+      <tr>
+        <td><div id="testingPie" style="border: 1px solid #ccc"></div></td>
+        <td><div id="lineChart" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
+  </body>
+</html>
