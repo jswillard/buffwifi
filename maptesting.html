@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Map Testing</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=yes' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+    body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; };
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY25lcHAiLCJhIjoiY2syZ2V4dnptMHVjbjNkdGcxMThqeGY3ciJ9.j1wVWHehps0TP3AW2CUbuA';
+
+// Set bounds to CU Campus
+var CU_bounds = [
+    [-105.276, 39.999795], // Southwest coordinates -105.275152, 39.999795
+    [-105.258987, 40.010987]  // Northeast coordinates -105.258987, 40.010987
+];
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/cnepp/ck2gkgml0157z1co0hlxv06vs',
+    center: [-105.267, 40.007],
+    zoom: 16,
+    maxBounds: CU_bounds // Sets bounds as max
+});
+
+
+map.addControl(new mapboxgl.NavigationControl());
+</script>
+
+</body>
+</html>
