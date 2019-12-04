@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=yes' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+    <title>Suggestive Lettuce Speed Test</title>
+  </head>
+  <style>
+      body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; };
+  </style>
+
+  <body class="bg-secondary">
+    <br>
+    <div class="container">
+      <h1 class ="text-white">Suggestive Lettuce Wi-Fi Speed Test</h1>
+    </div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+        <table class="table shadow p-3 mb-5 rounded">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" colspan="4">Your speed test results</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="bg-white text-dark">Download</th>
+              <td class="text-white">?</td>
+              <th class="bg-white text-dark">Upload</th>
+              <td class="text-white">?</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-white text-dark">Location</th>
+              <td class="text-white">?</td>
+              <th class="bg-white text-dark">Ping</th>
+              <td class="text-white">?</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-white text-dark">Date</th>
+              <td class="text-white">?</td>
+              <th class="bg-white text-dark">Time</th>
+              <td class="text-white">?</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="col-4 text-center">
+          <img src="../CSCI-3308/PicsArt_11-07-11.01.54.png" class="rounded" align="middle" alt="logo" height="200" width="150">
+        </div>
+    </div>
+    <br>
+    <br>
+    </div>
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="charts-tab" data-toggle="tab" href="#charts" role="tab" aria-controls="charts" aria-selected="true">Chart View</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="suggestion-tab" data-toggle="tab" href="#suggestion" role="tab" aria-controls="suggestion" aria-selected="false">Suggestions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="best-tab" data-toggle="tab" href="#best" role="tab" aria-controls="best" aria-selected="false">Best and Worst</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="charts" height="500px" role="tabpanel" aria-labelledby="charts-tab">
+          <iframe src="../CSCI-3308/Charts.html" width="100%" height="500px"></iframe>
+        </div>
+        <div class="tab-pane fade" id="suggestion" role="tabpanel" aria-labelledby="suggestion-tab">...
+        </div>
+        <div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">...
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="container" height="700px">
+      <iframe src="../CSCI-3308/maptesting.html" width="100%" height="700px"></iframe>>
+    </div>
+        
+      </div>
+
+    <br>
+    <br>
+
+  <br>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
