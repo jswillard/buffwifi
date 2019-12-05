@@ -21,62 +21,61 @@
             <div class="col">
               <input type="text" class="form-control" placeholder="Ping" name="ping" id="ping">
             </div>
+            <div class="col">
+              <select placeholder="Location" class="form-control" id="select" name="location" id="ping">
+                <option selected disabled>Location</option>
+                <option>Benson Earth Sciences</option>
+                <option>Clare Small</option>
+                <option>Cristol Chemistry and Biochemistry</option>
+                <option>Duane Physics and Astrophysics</option>
+                <option>Eaton Humanities</option>
+                <option>Economics</option>
+                <option>Education</option>
+                <option>Ekeley Science</option>
+                <option>Environmental Design</option>
+                <option>Fleming Law</option>
+                <option>Gold Biosciences</option>
+                <option>Guggenheim Geography</option>
+                <option>Hale Science</option>
+                <option>Hellems Arts and Sciences</option>
+                <option>Imig Music</option>
+                <option>JILA</option>
+                <option>Ketchum Arts and Sciences</option>
+                <option>Koelbel (Leeds School of Business)</option>
+                <option>Mathematics</option>
+                <option>McKenna Languages</option>
+                <option>Muenzinger Psychology</option>
+                <option>Norlin Library</option>
+                <option>Porter Biosciences</option>
+                <option>Ramaley Biology</option>
+                <option>ATLAS Center</option>
+                <option>Visual Arts Complex</option>
+                <option>Wolf Law</option>
+                <option>Museum Collections</option>
+                <option>Rec Center</option>
+                <option>University Memorial Center (UMC)</option>
+                <option>Center for Community (C4C)</option>
+                <option>Engineering Center</option>
+                <option>Integrated Teaching & Learning Laboratory (ITLL)</option>
+                <option>Discovery Learning Center (DLC)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <br>
+            <button type="submit" class="btn btn-dark text-center">Continue</button>
           </div>
         </form>
-        <div>
-          <p id="locationCheck"></p>
-          <button onclick="getResults();" class="btn btn-dark">Continue</button>
-        </div>
-      </div>
     </div>
     </body>
     <script>
-    var lat,long,acc,alt,alcAcc;
-    var flag = 0;
-
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-
-    function success(pos) {
-      flag = 1;
-      var crd = pos.coords;
-
-      lat = crd.latitude;
-      long = crd.longitude;
-      acc = crd.accuracy;
-      flag = 4;
-    }
-
-    function error(error) {
-      if (error.code == error.PERMISSION_DENIED) {
-        flag = 2;
-      }
-      else {
-        console.warn(`ERROR(${error.code}): ${error.message}`);
-        flag = 3;
-      }
-
-    }
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
     function getResults(){
-      if (flag == 1){
-        document.getElementById("locationCheck").innerHTML = "<br>Please wait for location data in order to continue";
-        return;
-      }
-      if (flag == 2){
-        document.getElementById("locationCheck").innerHTML = "<br>Please accept location permission in order to continue";
-        navigator.geolocation.getCurrentPosition(success, error, options);
-        return;
-      }
       var down = document.getElementById('down');
       var up = document.getElementById('up');
       var ping = document.getElementById('ping');
+      var loc = document.getElementById('select');
 
-      window.location.replace(window.location.href + "results?down=" + down.value + "&up=" + up.value + "&ping=" + ping.value + "&lat=" + lat + "&long=" + long);
+      window.location.replace(window.location.href + "results?down=" + down.value + "&up=" + up.value + "&ping=" + ping.value + "&loc=" + select.value);
 
     }
     </script>
