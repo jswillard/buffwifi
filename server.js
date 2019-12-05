@@ -3,7 +3,7 @@ const path = require('path');
 const https = require('https');
 const fs = require('fs');
 const pug = require('pug');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')();
 
 let app = express();
 
@@ -11,9 +11,15 @@ var port = process.env.PORT || 3000;
 
 var date = new Date();
 
-const dbConfig = process.env.DATABASE_URL;
+const cn = {
+    host: 'localhost', // 'localhost' is the default;
+    port: 5432, // 5432 is the default;
+    database: 'database',
+    user: 'admin',
+    password: 'password'
+};
 
-let db = pgp(dbConfig);
+let db = pgp(cn);
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));
@@ -28,57 +34,24 @@ app.get('/results', function(req, res) {
   var upload = req.query.up;
   var download = req.query.down;
   var ping = req.query.ping;
-	var insert_statement = "INSERT INTO location_data (upload, download, ping, times_stamp) VALUES ("+ upload + "," + download + "," + ping+ ", NOW()"+" ) ON CONFLICT DO NOTHING;";
 
-	db.task('get-everything', task => {
-        return task.batch([
-            task.any(insert_statement),
-        ]);
-    })
-    .then(function() {
-        res.render('SpeedTestResults',{
-            lat:latitude,
-            long:longitude,
-            up:upload,
-            down:download,
-            ping:ping,
-            time:getDateTime()
-        });
-        console.log("Adding entry into database");
-    })
-    .catch(error => {
-        // display error message in case an error
-            console.log("Na fam, your shit broke: ", error);
-            res.render('SpeedTestResults');
-    });
+  res.sendFile(path.join(__dirname + '/views/SpeedTestResults.html'));
 });
 
-app.get('/', function(req, res) {
-	var data =  'SELECT * FROM location_data;';
-	db.task('get-everything', task => {
-        return task.batch([
-            task.any(data),
-        ]);
-    })
-    .then(info => {
-        res.render('SpeedTestResults')
-        console.log(info)
-    })
-    .catch(error => {
-        // display error message in case an error
-        console.log("Na fam, your shit broke.", error)
-        res.render('SpeedTestResults')
-    });
-});
-
-//testing purposes please ignore
-app.get('/iframe', function(req, res) {
+app.get('/chart', function(req, res) {
   var loc = req.query.loc;
-  res.render('iframe', {location: loc});
-});
-//testing purposes please ignore
-app.get('/iframetest', function(req, res) {
-  res.sendFile(path.join(__dirname + '/views/iframeParent.HTML'));
+
+  db.any("SELECT avg(download) as down, avg(upload) as up, EXTRACT(hour from time_stamp) as hour FROM speedtests WHERE location='" + loc + "' GROUP BY EXTRACT(hour from time_stamp)")
+    .then(function(data) {
+      var temp = new Array();
+      for (var i = 0; i < data.length; i++){
+        temp.push([data[i]['hour'].toString(), data[i]['down'], data[i]['up']]);
+      }
+      res.render('chart', {arr: temp, loc: loc});
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 });
 
 

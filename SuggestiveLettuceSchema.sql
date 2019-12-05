@@ -18,20 +18,22 @@
 SELECT 'CREATE DATABASE suggestivelettuce' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'suggestivelettuce')\gexec
 
 -- Table Createion:
-CREATE TABLE IF NOT EXISTS location_data(
-    locationID SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS speedtests(
+    location TEXT,
     latitude FLOAT,
     longitude FLOAT,
     upload FLOAT,
     download FLOAT,
     ping FLOAT,
-    times_stamp DATE
+    time_stamp TIMESTAMP
 )
 
 CREATE TABLE IF NOT EXISTS users(
     userID SERIAL PRIMARY KEY,
     cookie VARCHAR(20),
 )
+
+INSERT INTO speedtests (upload, download, ping, times_stamp) VALUES (50,75,15, NOW()) ON CONFLICT DO NOTHING;
 
 -- These are the commands to create a new user. All of the user information here will match whats in the node.js file.
 
