@@ -35,6 +35,10 @@ CREATE TABLE IF NOT EXISTS users(
 
 INSERT INTO speedtests (upload, download, ping, times_stamp) VALUES (50,75,15, NOW()) ON CONFLICT DO NOTHING;
 
+
+INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES (50,75,15, NOW(), 'UMC');
+INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES (43,45,5, NOW(), 'UMC');
+
 -- These are the commands to create a new user. All of the user information here will match whats in the node.js file.
 
 -- CREATE ROLE captain WITH LOGIN PASSWORD 'SuggestiveLettuce';

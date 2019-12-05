@@ -19,7 +19,7 @@ const cn = {
     password: 'password'
 };
 
-let db = pgp(cn);
+let db = pgp(process.env.DATABASE_URL || cn);
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/'));
