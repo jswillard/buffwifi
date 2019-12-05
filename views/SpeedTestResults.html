@@ -7,58 +7,60 @@
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
-    <script src="../resources/scripts/results.js"></script>
-		<title>Suggestive Lettuce Speed Test</title>
+		<script>
+      function showChart(sender, element){
+        var chart_frame = document.getElementById(element);
+        var sender = document.getElementById(sender);
+        chart_frame.src = "/chart?loc=" + sender.value;
+        console.log("show");
+      }
+    </script>
+		<title>Campus WiFi Speed</title>
 	</head>
 	<style>
 		body { margin: 0; padding: 0; }
 		#map { position: absolute; top: 0; bottom: 0; width: 100%; };
 	</style>
-	<body class="bg-secondary">
+	<body class="bg-light">
 		<br>
 		<div class="container">
-			<h1 class ="text-white">Suggestive Lettuce Wi-Fi Speed Test</h1>
+      <div class="jumbotron">
+        <h1 class="display-4">Campus Wi-Fi Speed</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" colspan="4">Your Results</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Download</th>
+                <td>?</td>
+                <th>Location</th>
+                <td>?</td>
+              </tr>
+              <tr>
+                <th>Upload</th>
+                <td>?</td>
+                <th>Date</th>
+                <td>?</td>
+              </tr>
+              <tr>
+                <th>Ping</th>
+                <td>?</td>
+                <th>Time</th>
+                <td>?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 		</div>
 		<br>
-		<div class="container">
-			<div class="row">
-				<div class="col-8">
-					<table class="table shadow p-3 mb-5 rounded">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col" colspan="4">Your speed test results</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row" class="bg-white text-dark">Download</th>
-								<td class="text-white">?</td>
-								<th class="bg-white text-dark">Upload</th>
-								<td class="text-white">?</td>
-							</tr>
-							<tr>
-								<th scope="row" class="bg-white text-dark">Location</th>
-								<td class="text-white">?</td>
-								<th class="bg-white text-dark">Ping</th>
-								<td class="text-white">?</td>
-							</tr>
-							<tr>
-								<th scope="row" class="bg-white text-dark">Date</th>
-								<td class="text-white">?</td>
-								<th class="bg-white text-dark">Time</th>
-								<td class="text-white">?</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-4 text-center">
-					<img src="../CSCI-3308/PicsArt_11-07-11.01.54.png" class="rounded" align="middle" alt="logo" height="200" width="150">
-				</div>
-			</div>
-			<br>
-			<br>
-		</div>
-		<div class="container shadow p-3 mb-5 bg-white rounded">
+		<div class="container p-3 mb-5 bg-white rounded">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" id="charts-tab" data-toggle="tab" href="#charts" role="tab" aria-controls="charts" aria-selected="true">Chart View</a>
@@ -72,67 +74,200 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="charts" height="500px" role="tabpanel" aria-labelledby="charts-tab">
-          <br>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Location
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button" onclick="showChart('UMC','chart');">UMC</button>
-              <button class="dropdown-item" type="button">C4C</button>
-              <button class="dropdown-item" type="button">Engineering Center</button>
-            </div>
-          </div>
-          <br>
-          <iframe id="chart" src="" width="100%" height="600px" frameborder="0"></iframe>
+					<br>
+            <select class="form-control" id="select" name="location" onchange="showChart('select', 'chart');">
+              <option selected disabled>Location</option>
+              <option>Benson Earth Sciences</option>
+              <option>Clare Small</option>
+              <option>Cristol Chemistry and Biochemistry</option>
+              <option>Duane Physics and Astrophysics</option>
+              <option>Eaton Humanities</option>
+              <option>Economics</option>
+              <option>Education</option>
+              <option>Ekeley Science</option>
+              <option>Environmental Design</option>
+              <option>Fleming Law</option>
+              <option>Gold Biosciences</option>
+              <option>Guggenheim Geography</option>
+              <option>Hale Science</option>
+              <option>Hellems Arts and Sciences</option>
+              <option>Imig Music</option>
+              <option>JILA</option>
+              <option>Ketchum Arts and Sciences</option>
+              <option>Koelbel (Leeds School of Business)</option>
+              <option>Mathematics</option>
+              <option>McKenna Languages</option>
+              <option>Muenzinger Psychology</option>
+              <option>Norlin Library</option>
+              <option>Porter Biosciences</option>
+              <option>Ramaley Biology</option>
+              <option>ATLAS Center</option>
+              <option>Visual Arts Complex</option>
+              <option>Wolf Law</option>
+              <option>Museum Collections</option>
+              <option>Rec Center</option>
+              <option>UMC</option>
+              <option>Center for Community (C4C)</option>
+              <option>Engineering Center</option>
+              <option>Integrated Teaching & Learning Laboratory (ITLL)</option>
+              <option>Discovery Learning Center (DLC)</option>
+            </select>
+					<br>
+					<iframe id="chart" src="" width="100%" height="600px" frameborder="0"></iframe>
 				</div>
 				<div class="tab-pane fade" id="compare" role="tabpanel" aria-labelledby="compare-tab">
-          <div class="row">
-            <div class="col-sm-6">
-              <br>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Select Location
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" onclick="showChart('UMC','chart1');">UMC</button>
-                  <button class="dropdown-item" type="button">C4C</button>
-                  <button class="dropdown-item" type="button">Engineering Center</button>
-                </div>
-              </div>
-              <br>
-              <iframe id="chart1" src="" width="100%" height="600px" frameborder="0"></iframe>
-            </div>
-            <div class="col-sm-6">
-              <br>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Select Location
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" onclick="showChart('UMC','chart2');">UMC</button>
-                  <button class="dropdown-item" type="button">C4C</button>
-                  <button class="dropdown-item" type="button">Engineering Center</button>
-                </div>
-              </div>
-              <br>
-              <iframe id="chart2" src="" width="100%" height="600px" frameborder="0"></iframe>
-            </div>
-          </div>
-        </div>
-				<div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">...</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<br>
+              <select class="form-control" id="select1" name="location" onchange="showChart('select1', 'chart1');">
+                <option selected disabled>Location</option>
+                <option>Benson Earth Sciences</option>
+                <option>Clare Small</option>
+                <option>Cristol Chemistry and Biochemistry</option>
+                <option>Duane Physics and Astrophysics</option>
+                <option>Eaton Humanities</option>
+                <option>Economics</option>
+                <option>Education</option>
+                <option>Ekeley Science</option>
+                <option>Environmental Design</option>
+                <option>Fleming Law</option>
+                <option>Gold Biosciences</option>
+                <option>Guggenheim Geography</option>
+                <option>Hale Science</option>
+                <option>Hellems Arts and Sciences</option>
+                <option>Imig Music</option>
+                <option>JILA</option>
+                <option>Ketchum Arts and Sciences</option>
+                <option>Koelbel (Leeds School of Business)</option>
+                <option>Mathematics</option>
+                <option>McKenna Languages</option>
+                <option>Muenzinger Psychology</option>
+                <option>Norlin Library</option>
+                <option>Porter Biosciences</option>
+                <option>Ramaley Biology</option>
+                <option>ATLAS Center</option>
+                <option>Visual Arts Complex</option>
+                <option>Wolf Law</option>
+                <option>Museum Collections</option>
+                <option>Rec Center</option>
+                <option>UMC</option>
+                <option>Center for Community (C4C)</option>
+                <option>Engineering Center</option>
+                <option>Integrated Teaching & Learning Laboratory (ITLL)</option>
+                <option>Discovery Learning Center (DLC)</option>
+              </select>
+							<br>
+							<iframe id="chart1" src="" width="100%" height="400px" frameborder="0"></iframe>
+						</div>
+						<div class="col-sm-6">
+							<br>
+              <select class="form-control" id="select2" name="location" onchange="showChart('select2', 'chart2');">
+                <option selected disabled>Location</option>
+                <option>Benson Earth Sciences</option>
+                <option>Clare Small</option>
+                <option>Cristol Chemistry and Biochemistry</option>
+                <option>Duane Physics and Astrophysics</option>
+                <option>Eaton Humanities</option>
+                <option>Economics</option>
+                <option>Education</option>
+                <option>Ekeley Science</option>
+                <option>Environmental Design</option>
+                <option>Fleming Law</option>
+                <option>Gold Biosciences</option>
+                <option>Guggenheim Geography</option>
+                <option>Hale Science</option>
+                <option>Hellems Arts and Sciences</option>
+                <option>Imig Music</option>
+                <option>JILA</option>
+                <option>Ketchum Arts and Sciences</option>
+                <option>Koelbel (Leeds School of Business)</option>
+                <option>Mathematics</option>
+                <option>McKenna Languages</option>
+                <option>Muenzinger Psychology</option>
+                <option>Norlin Library</option>
+                <option>Porter Biosciences</option>
+                <option>Ramaley Biology</option>
+                <option>ATLAS Center</option>
+                <option>Visual Arts Complex</option>
+                <option>Wolf Law</option>
+                <option>Museum Collections</option>
+                <option>Rec Center</option>
+                <option>UMC</option>
+                <option>Center for Community (C4C)</option>
+                <option>Engineering Center</option>
+                <option>Integrated Teaching & Learning Laboratory (ITLL)</option>
+                <option>Discovery Learning Center (DLC)</option>
+              </select>
+							<br>
+							<iframe id="chart2" src="" width="100%" height="600px" frameborder="0"></iframe>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">
+					<div class="row">
+						<div class="col-sm-6">
+							<br>
+							<h3 class='display-6 text-center'>Best WiFi on campus</h3>
+							<table class="table">
+								<thead class="thead-dark">
+									<tr>
+										<th>Building</th>
+										<th>Download Speed</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>University Memorial Center (UMC)</td>
+										<td>17 Mbps</td>
+									</tr>
+									<tr>
+										<td>Center for Community (C4C)</td>
+										<td>12 Mbps</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<h3 class='display-6 text-center'>Worst WiFi on campus</h3>
+							<table class="table">
+								<thead class="thead-dark">
+									<tr>
+										<th>Building</th>
+										<th>Download Speed</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<br>
-		<div class="container" height="700px">
-			<iframe src="../CSCI-3308/maptesting.html" width="100%" height="700px"></iframe>
-		</div>
-		</div>
-		<br>
-		<br>
 		<br>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	</body>
+  <hr>
+  <footer class="text-center">
+    <p>&copy; 2019 Team 113-3 Suggestive Lettuce<p>
+  </footer>
 </html>

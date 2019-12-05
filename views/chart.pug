@@ -12,7 +12,7 @@ head
         temp.push([array[i]+":00", parseInt(array[i+1]), parseInt(array[i+2])]);
       }
       var data = new google.visualization.arrayToDataTable(temp);
-      var options = {title: 'Internet Speed at the #{loc}', curveType: 'function', height: 600};
+      var options = {title: 'Internet Speed at the #{loc}', curveType: 'function'};
       var chart = new google.visualization.LineChart(document.getElementById('lineChart'));
       chart.draw(data, options);
     }
