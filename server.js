@@ -60,8 +60,6 @@ var buildings = ["Benson Earth Sciences",
 "Integrated Teaching & Learning Laboratory (ITLL)",
 "Discovery Learning Center (DLC)"];
 
-console.log(buildings)
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/views/index.html'));
 })
@@ -79,7 +77,7 @@ app.get('/chart', function(req, res) {
   var loc = req.query.loc;
   var size = req.query.size;
 
-  db.any("SELECT avg(download) as down, avg(upload) as up, EXTRACT(hour from time_stamp) as hour FROM speedtests WHERE location='" + loc + "' GROUP BY EXTRACT(hour from time_stamp)")
+  db.any("SELECT avg(download) as down, avg(upload) as up, EXTRACT(hour from time_stamp) as hour FROM speedtests WHERE location='" + loc + "' GROUP BY EXTRACT(hour from time_stamp) ORDER BY hour")
     .then(function(data) {
       var temp = new Array();
       for (var i = 0; i < data.length; i++){
