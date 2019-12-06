@@ -79,8 +79,11 @@ app.get('/results', function(req, res) {
 
   db.any(query_best)
     .then(function(data) {
-      var best = data;
-      console.log(best);
+      var best = new Array();
+      for (var i = 0; i < data.length; i++){
+        best.push(data[i]['location'].toString());
+        best.push(data[i]['best_download'].toString());
+      }
     })
     .catch(function(error) {
         // error;
@@ -88,15 +91,18 @@ app.get('/results', function(req, res) {
 
     db.any(query_worst)
       .then(function(data) {
-        var worst = data;
-        console.log(worst);
+        var worst = new Array();
+        for (var i = 0; i < data.length; i++){
+          worst.push(data[i]['location'].toString());
+          worst.push(data[i]['worst_download'].toString());
+        }
       })
       .catch(function(error) {
           // error;
       });
 
   //res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
-  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
+  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time, best: best, worst: worst});
 });
 
 app.get('/chart', function(req, res) {

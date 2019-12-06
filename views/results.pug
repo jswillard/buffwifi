@@ -179,7 +179,7 @@ br
       .row
         .col-sm-6
           br
-          h3.display-6.text-center Best WiFi on campus
+          h3.display-6.text-center Best Wi-Fi on campus
           table.table
             thead.thead-dark
               tr
@@ -187,17 +187,17 @@ br
                 th Download Speed
             tbody
               tr
-                td University Memorial Center (UMC)
-                td 17 Mbps
+                td #{best}[0]
+                td #{best}[1]
               tr
-                td Center for Community (C4C)
-                td 12 Mbps
+                td #{best}[2]
+                td #{best}[3]
               tr
-                td 3
-                td Larry
+                td #{best}[4]
+                td #{best}[5]
         .col-sm-6
           br
-          h3.display-6.text-center Worst WiFi on campus
+          h3.display-6.text-center Worst Wi-Fi on campus
           table.table
             thead.thead-dark
               tr
@@ -205,14 +205,14 @@ br
                 th Download Speed
             tbody
               tr
-                td 1
-                td Mark
+                td #{worst}[0]
+                td #{worst}[1]
               tr
-                td 2
-                td Jacob
+                td #{worst}[2]
+                td #{worst}[3]
               tr
-                td 3
-                td Larry
+                td #{worst}[4]
+                td #{worst}[5]
     #map.tab-pane.fade(role='tabpanel' aria-labelledby='map-tab')
       iframe#map(src='/map' width='100%' height='800px' frameborder='0')
 br
