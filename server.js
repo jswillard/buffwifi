@@ -9,7 +9,7 @@ let app = express();
 
 var port = process.env.PORT || 3000;
 
-var date = new Date();
+var now = new Date();
 
 const cn = {
     host: 'localhost', // 'localhost' is the default;
@@ -65,14 +65,38 @@ app.get('/', function(req, res) {
 })
 
 app.get('/results', function(req, res) {
-  var upload = req.query.up;
   var download = req.query.down;
+  var upload = req.query.up;
   var ping = req.query.ping;
-  var loc = req.query.loc;
+  var loc = req.query.location;
+  var date = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
+  var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
   db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
 
-  res.sendFile(path.join(__dirname + '/views/SpeedTestResults.html'));
+  var query_best = "SELECT location, download as best_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
+  var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
+
+  db.any(query_best)
+    .then(function(data) {
+      var best = data;
+      console.log(best);
+    })
+    .catch(function(error) {
+        // error;
+    });
+
+    db.any(query_worst)
+      .then(function(data) {
+        var worst = data;
+        console.log(worst);
+      })
+      .catch(function(error) {
+          // error;
+      });
+
+  //res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
+  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
 });
 
 app.get('/chart', function(req, res) {

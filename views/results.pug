@@ -1,0 +1,226 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=yes')
+  script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous')
+  link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet')
+  script.
+    function showChart(sender, element){
+    var frame = document.getElementById(element);
+    var sender = document.getElementById(sender);
+    frame.src = "/chart?loc=" + sender.value + "&size=" + frame.height;
+    console.log("show");
+    }
+  title Campus WiFi Speed
+br
+.container
+  .jumbotron.bg-light
+    h1.display-4 Campus Wi-Fi Speed
+    p.lead
+    hr.my-4
+    div
+      table.table
+        thead.thead-dark
+          tr
+            th(scope='col' colspan='4') Your Results
+        tbody
+          tr
+            th Download
+            td #{down}
+            th Location
+            td #{loc}
+          tr
+            th Upload
+            td #{up}
+            th Date
+            td #{date}
+          tr
+            th Ping
+            td #{ping}
+            th Time
+            td #{time}
+br
+.container.p-3.mb-5.bg-white.rounded
+  ul#tabPanel.nav.nav-tabs(role='tablist')
+    li.nav-item
+      a#charts-tab.nav-link.active(data-toggle='tab' href='#charts' role='tab' aria-controls='charts' aria-selected='true') Chart View
+    li.nav-item
+      a#compare-tab.nav-link(data-toggle='tab' href='#compare' role='tab' aria-controls='compare' aria-selected='false') Compare
+    li.nav-item
+      a#best-tab.nav-link(data-toggle='tab' href='#best' role='tab' aria-controls='best' aria-selected='false') Best and Worst
+    li.nav-item
+      a#map-tab.nav-link(data-toggle='tab' href='#map' role='tab' aria-controls='map' aria-selected='false') Map
+  #tabContent.tab-content
+    #charts.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='charts-tab')
+      br
+      select#select.form-control(name='location' onchange="showChart('select', 'chart');")
+        option(selected='' disabled='') Location
+        option Benson Earth Sciences
+        option Clare Small
+        option Cristol Chemistry and Biochemistry
+        option Duane Physics and Astrophysics
+        option Eaton Humanities
+        option Economics
+        option Education
+        option Ekeley Science
+        option Environmental Design
+        option Fleming Law
+        option Gold Biosciences
+        option Guggenheim Geography
+        option Hale Science
+        option Hellems Arts and Sciences
+        option Imig Music
+        option JILA
+        option Ketchum Arts and Sciences
+        option Koelbel (Leeds School of Business)
+        option Mathematics
+        option McKenna Languages
+        option Muenzinger Psychology
+        option Norlin Library
+        option Porter Biosciences
+        option Ramaley Biology
+        option ATLAS Center
+        option Visual Arts Complex
+        option Wolf Law
+        option Museum Collections
+        option Rec Center
+        option University Memorial Center (UMC)
+        option Center for Community (C4C)
+        option Engineering Center
+        option Integrated Teaching &amp; Learning Laboratory (ITLL)
+        option Discovery Learning Center (DLC)
+      br
+      iframe#chart(src='' width='100%' height='600px' frameborder='0')
+    #compare.tab-pane.fade(role='tabpanel' aria-labelledby='compare-tab')
+      .row
+        .col-sm-6
+          br
+          select#select1.form-control(name='location' onchange="showChart('select1', 'chart1');")
+            option(selected='' disabled='') Location
+            option Benson Earth Sciences
+            option Clare Small
+            option Cristol Chemistry and Biochemistry
+            option Duane Physics and Astrophysics
+            option Eaton Humanities
+            option Economics
+            option Education
+            option Ekeley Science
+            option Environmental Design
+            option Fleming Law
+            option Gold Biosciences
+            option Guggenheim Geography
+            option Hale Science
+            option Hellems Arts and Sciences
+            option Imig Music
+            option JILA
+            option Ketchum Arts and Sciences
+            option Koelbel (Leeds School of Business)
+            option Mathematics
+            option McKenna Languages
+            option Muenzinger Psychology
+            option Norlin Library
+            option Porter Biosciences
+            option Ramaley Biology
+            option ATLAS Center
+            option Visual Arts Complex
+            option Wolf Law
+            option Museum Collections
+            option Rec Center
+            option University Memorial Center (UMC)
+            option Center for Community (C4C)
+            option Engineering Center
+            option Integrated Teaching &amp; Learning Laboratory (ITLL)
+            option Discovery Learning Center (DLC)
+          br
+          iframe#chart1(src='' width='100%' height='400px' frameborder='0')
+        .col-sm-6
+          br
+          select#select2.form-control(name='location' onchange="showChart('select2', 'chart2');")
+            option(selected='' disabled='') Location
+            option Benson Earth Sciences
+            option Clare Small
+            option Cristol Chemistry and Biochemistry
+            option Duane Physics and Astrophysics
+            option Eaton Humanities
+            option Economics
+            option Education
+            option Ekeley Science
+            option Environmental Design
+            option Fleming Law
+            option Gold Biosciences
+            option Guggenheim Geography
+            option Hale Science
+            option Hellems Arts and Sciences
+            option Imig Music
+            option JILA
+            option Ketchum Arts and Sciences
+            option Koelbel (Leeds School of Business)
+            option Mathematics
+            option McKenna Languages
+            option Muenzinger Psychology
+            option Norlin Library
+            option Porter Biosciences
+            option Ramaley Biology
+            option ATLAS Center
+            option Visual Arts Complex
+            option Wolf Law
+            option Museum Collections
+            option Rec Center
+            option University Memorial Center (UMC)
+            option Center for Community (C4C)
+            option Engineering Center
+            option Integrated Teaching &amp; Learning Laboratory (ITLL)
+            option Discovery Learning Center (DLC)
+          br
+          iframe#chart2(src='' width='100%' height='400px' frameborder='0')
+    #best.tab-pane.fade(role='tabpanel' aria-labelledby='best-tab')
+      .row
+        .col-sm-6
+          br
+          h3.display-6.text-center Best WiFi on campus
+          table.table
+            thead.thead-dark
+              tr
+                th Building
+                th Download Speed
+            tbody
+              tr
+                td University Memorial Center (UMC)
+                td 17 Mbps
+              tr
+                td Center for Community (C4C)
+                td 12 Mbps
+              tr
+                td 3
+                td Larry
+        .col-sm-6
+          br
+          h3.display-6.text-center Worst WiFi on campus
+          table.table
+            thead.thead-dark
+              tr
+                th Building
+                th Download Speed
+            tbody
+              tr
+                td 1
+                td Mark
+              tr
+                td 2
+                td Jacob
+              tr
+                td 3
+                td Larry
+    #map.tab-pane.fade(role='tabpanel' aria-labelledby='map-tab')
+      iframe#map(src='/map' width='100%' height='800px' frameborder='0')
+br
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy' crossorigin='anonymous')
+hr
+footer.text-center
+  p &copy; 2019 Team 113-3: Suggestive Lettuce
+  p
+    | John Willard | Liam Nestelroad | Caitlin Neppl | Matthew Jonas | Ben Prucha | Neil Ray
