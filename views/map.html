@@ -107,7 +107,7 @@ map.on('load', function() {
   // listener for hover response to show download speed
   map.on('mousemove', function(e) {
     var buildings = map.queryRenderedFeatures(e.point, {
-      layers: ['building-colors']
+      layers: ['buildings-colors']
     });
     if (buildings.length > 0) {
       document.getElementById('hov').innerHTML = '<h3><strong>' + buildings[0].properties.building + '</strong></h3><p><strong><em>' + buildings[0].properties.download + '</strong> Mbps Download</em></p>';
