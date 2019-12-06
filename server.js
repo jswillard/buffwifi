@@ -72,7 +72,7 @@ app.get('/results', function(req, res) {
   var date = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
   var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-  db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
+  //db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
 
   var query_best = "SELECT location, download as best_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
   var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
@@ -86,7 +86,7 @@ app.get('/results', function(req, res) {
       }
     })
     .catch(function(error) {
-        // error;
+      console.log(error);
     });
 
     db.any(query_worst)
@@ -98,11 +98,11 @@ app.get('/results', function(req, res) {
         }
       })
       .catch(function(error) {
-          // error;
+        console.log(error);
       });
 
-  //res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
-  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time, best: best, worst: worst});
+  res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
+  //res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time, best: best, worst: worst});
 });
 
 app.get('/chart', function(req, res) {
