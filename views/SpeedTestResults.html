@@ -9,24 +9,20 @@
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
 		<script>
       function showChart(sender, element){
-        var chart_frame = document.getElementById(element);
+        var frame = document.getElementById(element);
         var sender = document.getElementById(sender);
-        chart_frame.src = "/chart?loc=" + sender.value;
+        frame.src = "/chart?loc=" + sender.value + "&size=" + frame.height;
         console.log("show");
       }
     </script>
 		<title>Campus WiFi Speed</title>
 	</head>
-	<style>
-		body { margin: 0; padding: 0; }
-		#map { position: absolute; top: 0; bottom: 0; width: 100%; };
-	</style>
 	<body class="bg-light">
 		<br>
 		<div class="container">
-      <div class="jumbotron">
+      <div class="jumbotron bg-light">
         <h1 class="display-4">Campus Wi-Fi Speed</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p class="lead"></p>
         <hr class="my-4">
         <div>
           <table class="table">
@@ -61,7 +57,7 @@
 		</div>
 		<br>
 		<div class="container p-3 mb-5 bg-white rounded">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<ul class="nav nav-tabs" id="tabPanel" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" id="charts-tab" data-toggle="tab" href="#charts" role="tab" aria-controls="charts" aria-selected="true">Chart View</a>
 				</li>
@@ -71,9 +67,12 @@
 				<li class="nav-item">
 					<a class="nav-link" id="best-tab" data-toggle="tab" href="#best" role="tab" aria-controls="best" aria-selected="false">Best and Worst</a>
 				</li>
+        <li class="nav-item">
+					<a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="false">Map</a>
+				</li>
 			</ul>
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="charts" height="500px" role="tabpanel" aria-labelledby="charts-tab">
+			<div class="tab-content" id="tabContent">
+				<div class="tab-pane fade show active" id="charts" role="tabpanel" aria-labelledby="charts-tab">
 					<br>
             <select class="form-control" id="select" name="location" onchange="showChart('select', 'chart');">
               <option selected disabled>Location</option>
@@ -199,7 +198,7 @@
                 <option>Discovery Learning Center (DLC)</option>
               </select>
 							<br>
-							<iframe id="chart2" src="" width="100%" height="600px" frameborder="0"></iframe>
+							<iframe id="chart2" src="" width="100%" height="400px" frameborder="0"></iframe>
 						</div>
 					</div>
 				</div>
@@ -259,6 +258,9 @@
 						</div>
 					</div>
 				</div>
+        <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+          ...
+        </div>
 			</div>
 		</div>
 		<br>
@@ -268,6 +270,7 @@
 	</body>
   <hr>
   <footer class="text-center">
-    <p>&copy; 2019 Team 113-3 Suggestive Lettuce<p>
+    <p>&copy; 2019 Team 113-3: Suggestive Lettuce</p>
+    <p>John Willard | Liam Nestelroad | Caitlin Neppl | Matthew Jonas | Ben Prucha | Neil Ray</p>
   </footer>
 </html>

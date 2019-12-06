@@ -77,6 +77,7 @@ app.get('/results', function(req, res) {
 
 app.get('/chart', function(req, res) {
   var loc = req.query.loc;
+  var size = req.query.size;
 
   db.any("SELECT avg(download) as down, avg(upload) as up, EXTRACT(hour from time_stamp) as hour FROM speedtests WHERE location='" + loc + "' GROUP BY EXTRACT(hour from time_stamp)")
     .then(function(data) {
@@ -84,7 +85,7 @@ app.get('/chart', function(req, res) {
       for (var i = 0; i < data.length; i++){
         temp.push([data[i]['hour'].toString(), data[i]['down'], data[i]['up']]);
       }
-      res.render('chart', {arr: temp, loc: loc});
+      res.render('chart', {arr: temp, loc: loc, size: size});
     })
     .catch(function(error) {
       console.log(error);

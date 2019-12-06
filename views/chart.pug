@@ -7,12 +7,12 @@ head
     function Chart(){
       var array = '#{arr}'.split(',');
       var temp = new Array();
-      temp.push(['Time', 'Download', 'Upload']);
+      temp.push(['Time', 'Down', 'Up']);
       for (var i = 0; i < array.length; i+=3){
         temp.push([array[i]+":00", parseInt(array[i+1]), parseInt(array[i+2])]);
       }
       var data = new google.visualization.arrayToDataTable(temp);
-      var options = {title: 'Internet Speed at the #{loc}', curveType: 'function'};
+      var options = {title: '#{loc}: Internet Speed', curveType: 'function', height: parseInt('#{size}')};
       var chart = new google.visualization.LineChart(document.getElementById('lineChart'));
       chart.draw(data, options);
     }
