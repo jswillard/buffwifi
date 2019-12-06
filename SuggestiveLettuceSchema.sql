@@ -20,13 +20,11 @@ SELECT 'CREATE DATABASE suggestivelettuce' WHERE NOT EXISTS (SELECT FROM pg_data
 -- Table Createion:
 CREATE TABLE IF NOT EXISTS speedtests(
     location TEXT,
-    latitude FLOAT,
-    longitude FLOAT,
     upload FLOAT,
     download FLOAT,
     ping FLOAT,
     time_stamp TIMESTAMP
-)
+);
 
 CREATE TABLE IF NOT EXISTS users(
     userID SERIAL PRIMARY KEY,
