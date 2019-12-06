@@ -77,32 +77,8 @@ app.get('/results', function(req, res) {
   var query_best = "SELECT location, download as best_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
   var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
 
-  db.any(query_best)
-    .then(function(data) {
-      var best = new Array();
-      for (var i = 0; i < data.length; i++){
-        best.push(data[i]['location'].toString());
-        best.push(data[i]['best_download'].toString());
-      }
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
-    db.any(query_worst)
-      .then(function(data) {
-        var worst = new Array();
-        for (var i = 0; i < data.length; i++){
-          worst.push(data[i]['location'].toString());
-          worst.push(data[i]['worst_download'].toString());
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
-  //res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time, best: best, worst: worst});
+  //res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
+  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
 });
 
 app.get('/chart', function(req, res) {
