@@ -70,6 +70,8 @@ app.get('/results', function(req, res) {
   var ping = req.query.ping;
   var loc = req.query.loc;
 
+  db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
+
   res.sendFile(path.join(__dirname + '/views/SpeedTestResults.html'));
 });
 
@@ -88,6 +90,21 @@ app.get('/chart', function(req, res) {
     .catch(function(error) {
       console.log(error);
     });
+});
+
+app.get('/data', function(req, res) {
+  db.any("SELECT avg(download) as down, avg(upload) as up, EXTRACT(hour from time_stamp) as hour FROM speedtests WHERE location='" + loc + "' GROUP BY EXTRACT(hour from time_stamp) ORDER BY hour")
+    .then(function(data) {
+
+      res.sendFile(path.join(__dirname + '/data.json'));
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+});
+
+app.get('/map', function(req, res) {
+  res.sendFile(path.join(__dirname + '/views/map.html'));
 });
 
 

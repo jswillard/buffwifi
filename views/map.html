@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Map Testing</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+    body { margin: 0; padding: 0; }
+    h2, h3 {
+           margin: 10px;
+           font-size: 1.2em;
+       }
+    h3 {
+           font-size: 1em;
+       }
+    p {
+           font-size: 0.85em;
+           margin: 10px;
+           text-align: left;
+       }
+    .map-overlay {
+           position: absolute;
+           bottom: 0;
+           right: 0;
+           background: rgba(255, 255, 255, 0.8);
+           margin-right: 20px;
+           font-family: Arial, sans-serif;
+           overflow: auto;
+           border-radius: 3px;
+       }
+    #map {
+           position:absolute;
+           top:0;
+           bottom:0;
+           width:100%;
+       }
+      #msgbox {
+           top: 0;
+           height: 150px;
+           margin-top: 20px;
+           width: 250px;
+       }
+      #legend {
+           padding: 10px;
+           box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+           line-height: 18px;
+           height: 150px;
+           margin-bottom: 40px;
+           width: 100px;
+       }
+      .legend-key {
+           display:inline-block;
+           border-radius: 20%;
+           width: 10px;
+           height: 10px;
+           margin-right: 5px;
+       }
+  </style>
+</head>
+
+<body>
+
+<div id='map'></div>
+<div class='map-overlay' id='msgbox'><h2>CU Campus Wifi Speeds</h2><div id='hov'><p>Hover over a building to see details.</p></div></div>
+<div class='map-overlay' id='legend'></div>
+
+
+<script> //begin javascript
+
+//define access token (from mapbox studio)
+mapboxgl.accessToken = 'pk.eyJ1IjoiY25lcHAiLCJhIjoiY2syZ2V4dnptMHVjbjNkdGcxMThqeGY3ciJ9.j1wVWHehps0TP3AW2CUbuA';
+
+// Set bounds to CU Campus
+var CU_bounds = [
+    [-105.275152, 39.999795], // Southwest coordinates
+    [-105.258987, 40.010987]  // Northeast coordinates
+];
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/cnepp/ck2gkgml0157z1co0hlxv06vs',
+    center: [-105.267, 40.007],
+    zoom: 11,
+    maxBounds: CU_bounds // Sets bounds as max
+});
+
+// load event callback function - wait for initial load before adjustments
+map.on('load', function() {
+  map.getCanvas().style.cursor = 'default';    //standard cursor instead of dumb hand thing
+  //map.fitBounds([[-105.275152, 39.999795],[-105.258987, 40.010987]]);
+
+  //define layer & color brackets
+  var layers = ['0-5', '5-10', '10-15', '15-20', '20-25', '30-35', '35+'];
+  var colors = ['#f75e5e', '#f4841a', '#e7bf0d', '#f7e922', '#c4de5e','#73df26','#11a233'] //ugh
+  //create legend
+  for (i = 0; i < layers.length; i++) {
+    var layer = layers[i];
+    var color = colors[i];
+    var item = document.createElement('div');
+    var key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+    // msgbox
+    var value = document.createElement('span');
+    value.innerHTML = layer;
+    item.appendChild(key);
+    item.appendChild(value);
+    legend.appendChild(item);
+  }
+
+  // listener for hover response to show download speed
+  map.on('mousemove', function(e) {
+    var buildings = map.queryRenderedFeatures(e.point, {
+      layers: ['building-colors']
+    });
+
+    if (buildings.length > 0) {
+      document.getElementById('hov').innerHTML = '<h3><strong>' + buildings[0].properties.building + '</strong></h3><p><strong><em>' + buildings[0].properties.download + '</strong> Mbps Download</em></p>';
+    } else {
+      document.getElementById('hov').innerHTML = '<p>Hover over a building!</p>';
+    }
+  });
+
+});
+
+// navigation (zoom buttons)
+map.addControl(new mapboxgl.NavigationControl());
+// geolocate works hilariously poorly
+map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+
+
+</script>
+
+</body>
+</html>
