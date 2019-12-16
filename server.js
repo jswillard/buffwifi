@@ -79,9 +79,19 @@ app.get('/results', function(req, res) {
 
   db.multi(query_best + query_worst)
     .then((best, worst) => {
+      var data = []
+
+      best.forEach(element => function(element){
+        data.push(element['location']);
+        data.push(element['best_download']);
+      });
+      worst.forEach(element => function(element){
+        data.push(element['location']);
+        data.push(element['worst_download']);
+      });
       console.log(best);
       console.log(worst);
-      res.render('results',{up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
+      res.render('results',{up: upload, down: download, ping: ping, loc: loc, date: date, time: time, data: data});
     })
     .catch(error => {
       console.log(error);
