@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to get your estimated coordinates.</p>
+<p>Note: Must accept location services for this page.</p>
+
+<button onclick="getLocation()">Get Location Data</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude +
+  "<br>Accuracy: " + position.coords.accuracy +
+  "<br>Altitude: " + position.coords.altitude +
+  "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy;
+  ///var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  ///var est_loc = "https://google.com/maps/@"+lat","+lon
+  ///var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY"
+
+  ///document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+}
+</script>
+
+</body>
+</html>
