@@ -1,0 +1,94 @@
+Test 1: Submission of Results
+User should only be able to access the results page after these conditions are met:
+  -User has accepted locations permissions for the website
+  -User has filled all results fields before attempting to submit results
+  -Submitted results are non-negative integers less than 1000
+  
+  Test Case 1:
+  -User will decline locations permissions
+  -User will attempt to submit results with entries: 20|90|15
+  Expected Result: User should not be able to access results page since they declined locations permissions
+  
+  Test Case 2:
+  -User will accept locations permissions
+  -User will attempt to submit results with entries: -|90|15
+  Expected Result: User should not be able to access the results page since one of the form entries is blank
+  
+  Test Case 3:
+  -User will accept locations permissions
+  -User will attempt to submit results with entries: 20|-90|15
+  Expected Result: User should not be able to access results page since not all results are non-negative integers
+  
+  Test Case 4:
+  -User will accept locations permissions
+  -User will attempt to submit results with entries: 20|90|15
+  Expected Result: User should be able to access results page
+  
+ Test 2: Comparing Location Speed
+ User should be able to compare current location's speeds to those of another selected location
+ In order to do this, the user should follow these steps:
+  -Locate the chart section of the page after running the speed test
+  -If not already under "Chart View" tab, select that tab
+  -Select drop-down menu under "compare another location"
+  -Select a location other than the current location
+  
+  Test Case 1:
+  -User will follow the steps above from the Engineering Center, selecting UMC to compare with
+  Expected Result:
+  -Two wifi speed charts should be shown, Engineering Center on the left and UMC on the right
+  -Charts should be populated with data points
+  -The most recent data point for the Engineering Center should match the data in the table above
+    which details the user's speed test data
+  -The most recent data point for the UMC should match the wifi speed obtained by hovering over
+    the UMC on the map
+    
+  Test Case 2:
+  -User will follow the steps above from the Engineering Center, selecting the Enginnering Center to 
+    compare with
+  Expected Result:
+  -Two wifi speed charts should be shown, both representing the Engineering Center
+  -Charts should be populated with data points
+  -The most recent data point for the Engineering Center should match the data in the table above
+    which details the user's speed test data
+  -The most recent data point for the Engineering Center should match the wifi speed obtained by hovering over
+    the Engineering Center on the map
+    
+  Test Case 3:
+  -User will follow the steps above from the Engineering Center, not selecting a location to compare with
+  Expected Result:
+  -Two wifi speed charts should be shown, Engineering Center on the left and the right one blank
+  -Only the left chart should be populated with data points
+  -The most recent data point for the Engineering Center should match the data in the table above
+    which details the user's speed test data
+  -The most recent data point for the Engineering Center should match the wifi speed obtained by hovering over
+    the Engineering Center on the map
+    
+Test 3: Wifi status of all locations across campus
+User should be able to compare speeds at all locations across campus using the map
+In order to do this, the user should follow these steps:
+ -Locate the map section of the page after running the speed test
+ -If not already under "Map View" tab, select that tab
+  
+  Test Case 1:
+  -User will follow the steps above from the Engineering Center
+  Expected Result:
+  -Each building has a color that is based on its most recent wifi speed test
+  -The color can be cross-referenced with a legend that associates a color with a range of wifi speeds
+  -When the user hovers over a building, estimated wifi statistics are displayed to the user
+  -The speeds provided from hovering over the Engineering Center incorporate the user's speed test
+    and are related to the speed test data displayed at the top of the page
+  -The speeds provided from hovering over the Engineering Center are related to the last entry in the chart
+    for the Engineering Center
+  -No other location's speeds are impacted by the results of the previous test
+  
+  Test Case 1:
+  -User will follow the steps above from the UMC
+  Expected Result:
+  -Each building has a color that is based on its most recent wifi speed test
+  -The color can be cross-referenced with a legend that associates a color with a range of wifi speeds
+  -When the user hovers over a building, estimated wifi statistics are displayed to the user
+  -The speeds provided from hovering over the UMC incorporate the user's speed test
+    and are related to the speed test data displayed at the top of the page
+  -The speeds provided from hovering over the UMC are related to the last entry in the chart
+    for the UMC
+  -No other location's speeds are impacted by the results of the previous test
