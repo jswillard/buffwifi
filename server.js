@@ -87,9 +87,8 @@ app.get('/results', function(req, res) {
       console.log(error);
       res.render('results');
     });
-});
 
-  //res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
+    //res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
 });
 
 app.get('/chart', function(req, res) {
