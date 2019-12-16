@@ -130,5 +130,4 @@ app.get('/map', function(req, res) {
   res.sendFile(path.join(__dirname + '/views/map.html'));
 });
 
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
