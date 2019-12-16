@@ -81,15 +81,12 @@ app.get('/results', function(req, res) {
     .then((temp) => {
       var data = []
 
-      temp[0].forEach(element => function(element){
-        data.push(element['location']);
-        data.push(element['best_download']);
-      });
-      temp[1].forEach(element => function(element){
-        data.push(element['location']);
-        data.push(element['worst_download']);
-      });
-      console.log(temp);
+      for (var i = 0; i < temp.length; i++){
+        for (var j = 0; j < temp[i].length; j++){
+          data.push(temp[i][j][0]);
+          data.push(temp[i][j][1]);
+        }
+      }
       console.log(data);
       res.render('results',{up: upload, down: download, ping: ping, loc: loc, date: date, time: time, data: data});
     })
