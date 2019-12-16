@@ -89,6 +89,8 @@ app.get('/results', function(req, res) {
         data.push(element['location']);
         data.push(element['worst_download']);
       });
+      console.log(temp);
+      console.log(data);
       res.render('results',{up: upload, down: download, ping: ping, loc: loc, date: date, time: time, data: data});
     })
     .catch(error => {

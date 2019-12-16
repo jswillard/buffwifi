@@ -15,8 +15,9 @@ head
     }
   title Muninn Results
 br
-script.
-  console.log(#{data});
+script(type='text/javascript').
+  temp = '#{data}';
+  console.log(temp);
 
 body.bg-light
   .container
