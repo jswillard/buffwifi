@@ -2,7 +2,7 @@
  * Company: Suggestive Lettuce
  * Authors: Liam Nestelroad
  * Version: 1.2
- * 
+ *
  * Summary: This here is el carne y papas. The website will be hosted from this node js file using pug as the template engine and postgresql as the database. There are two different pug file: the first is the submit
  */
 const express = require('express'); // Add the express framework has been added
@@ -22,7 +22,7 @@ var fs = require('fs');
 // var file = require(fileName);
 
 /**********************
-  
+
   Database Connection information
 
   host: This defines the ip address of the server hosting our database.  We'll be using localhost and run our database on our local machine (i.e. can't be access via the Internet)
@@ -66,14 +66,6 @@ function getBuildingSpeed(currentBuilding, speeds){
     return -1;
 }
 
-const dbConfig = {
-	host: 'localhost',
-	port: 5432,
-	database: 'suggestivelettuce',
-	user: 'liam',
-	password: 'Thebestdayever1!'
-};
-
 let db = pgp(dbConfig);
 
 // set the view engine to ejs
@@ -83,7 +75,7 @@ app.use(express.static(__dirname + '/')); // This line is necessary for us to us
 app.get('/home', function(req, res) {
     // res.render('pages/home')
     res.sendFile(path.join(__dirname+'/views/pages/home.html'));
-    
+
 });
 
 app.get('/homeresults', function(req, res) {
