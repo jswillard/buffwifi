@@ -16,7 +16,7 @@ head
   title Muninn Results
 br
 script.
-  console.log('#{data}');
+  console.log(#{data});
 
 body.bg-light
   .container
@@ -32,9 +32,9 @@ body.bg-light
           tbody
             tr
               th Download
-              td #{down}
+              td= down
               th Location
-              td #{loc}
+              td= loc
             tr
               th Upload
               td #{up}
