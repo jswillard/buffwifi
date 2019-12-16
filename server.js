@@ -74,8 +74,8 @@ app.get('/results', function(req, res) {
 
   //db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
 
-  var query_best = "SELECT location, download as best_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
-  var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
+  var query_best = "SELECT location, download as download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
+  var query_worst = "SELECT location, download as download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
 
   db.multi(query_best + query_worst)
     .then((temp) => {
@@ -83,8 +83,8 @@ app.get('/results', function(req, res) {
 
       for (var i = 0; i < temp.length; i++){
         for (var j = 0; j < temp[i].length; j++){
-          data.push(temp[i][j][0]);
-          data.push(temp[i][j][1]);
+          data.push(temp[i][j]['location']);
+          data.push(temp[i][j]['download']);
         }
       }
       console.log(data);
