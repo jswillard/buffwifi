@@ -77,8 +77,19 @@ app.get('/results', function(req, res) {
   var query_best = "SELECT location, download as best_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
   var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
 
-  //res.render(path.join(__dirname + '/views/SpeedTestResults.html'));
-  res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
+  db.multi(query_best + query_worst)
+    .then((best, worst) => {
+      console.log(best);
+      console.log(worst);
+      res.render('results',{up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
+    })
+    .catch(error => {
+      console.log(error);
+      res.render('results');
+    });
+});
+
+  //res.render('results', {up: upload, down: download, ping: ping, loc: loc, date: date, time: time});
 });
 
 app.get('/chart', function(req, res) {
