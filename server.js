@@ -78,14 +78,14 @@ app.get('/results', function(req, res) {
   var query_worst = "SELECT location, download as worst_download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
 
   db.multi(query_best + query_worst)
-    .then((best, worst) => {
+    .then((temp) => {
       var data = []
 
-      best.forEach(element => function(element){
+      temp[0].forEach(element => function(element){
         data.push(element['location']);
         data.push(element['best_download']);
       });
-      worst.forEach(element => function(element){
+      temp[1].forEach(element => function(element){
         data.push(element['location']);
         data.push(element['worst_download']);
       });
