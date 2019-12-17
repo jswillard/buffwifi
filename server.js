@@ -73,7 +73,7 @@ app.get('/results', function(req, res) {
   var date = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
   var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-  if (download != null && upload != null && ping != null, && loc != null){
+  if (download != null && upload != null && ping != null && loc != null){
     db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
   }
 
