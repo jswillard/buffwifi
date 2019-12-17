@@ -4,6 +4,7 @@ const https = require('https');
 const fs = require('fs');
 const pug = require('pug');
 const pgp = require('pg-promise')();
+const shell = require('shelljs');
 
 let app = express();
 
@@ -115,12 +116,8 @@ app.get('/chart', function(req, res) {
     });
 });
 
-app.get('/data', function(req, res) {
-  var most_recent = "SELECT location, download FROM\
-      (SELECT DISTINCT ON (location) * \
-      FROM speedtests \
-      ORDER BY location, time_stamp DESC) t \
-      ORDER BY time_stamp DESC;"
+app.get('/map', function(req, res) {
+  var most_recent = "SELECT location, download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY time_stamp DESC;";
   db.any(most_recent)
     .then(function(data) {
       var fileName = './base_dataset_muninn.json';
@@ -155,16 +152,13 @@ app.get('/data', function(req, res) {
               }
           }
       }
-      res.sendFile(path.join(__dirname + '/base_dataset_muninn.json'));
+      shell.exec('./resources/updateMap.sh')
+      res.sendFile(path.join(__dirname + '/views/map.html'));
     })
     .catch(function(error) {
       console.log(error);
-      res.sendFile(path.join(__dirname + '/base_dataset_muninn.json'));
+      res.sendFile(path.join(__dirname + '/views/map.html'));
     });
-});
-
-app.get('/map', function(req, res) {
-  res.sendFile(path.join(__dirname + '/views/map.html'));
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
