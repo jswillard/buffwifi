@@ -154,7 +154,7 @@ app.get('/map', function(req, res) {
               }
           }
       }
-      shell.exec('./resources/updateMap.sh')
+      shell.exec('./resources/updateMap.sh');
       res.sendFile(path.join(__dirname + '/views/map.html'));
     })
     .catch(function(error) {
