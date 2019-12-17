@@ -163,4 +163,97 @@ app.get('/map', function(req, res) {
     });
 });
 
+app.get('/map', function(req, res) {
+  var most_recent = "SELECT location, download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY time_stamp DESC;";
+  db.any(most_recent)
+    .then(function(data) {
+      var fileName = './base_dataset_muninn.json';
+      var file = require(fileName);
+
+      var i = 0;
+      var x = 0;
+      var index;
+      for (i = 0; i < 35; i++){
+          flag = true;
+          while(flag){
+              if (file.features[x].properties.building != null){
+                  index = getBuildingSpeed(file.features[x].properties.building, most_recent);
+
+                  if(index != -1){
+                      file.features[x].properties.download = most_recent[0][index];
+                  }
+
+                  else{
+                      file.features[x].properties.download = 50;
+                  }
+
+                  fs.writeFile(fileName, JSON.stringify(file), function (err) {
+                      if (err) return console.log(err);
+                  });
+
+                  flag = false;
+                  x+=1;
+              }
+              else{
+                  x += 1;
+              }
+          }
+      }
+      shell.exec('./resources/updateMap.sh');
+      res.sendFile(path.join(__dirname + '/views/map.html'));
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendFile(path.join(__dirname + '/views/map.html'));
+    });
+});
+
+app.get('/data', function(req, res) {
+  var most_recent = "SELECT location, download FROM\
+      (SELECT DISTINCT ON (location) * \
+      FROM speedtests \
+      ORDER BY location, time_stamp DESC) t \
+      ORDER BY time_stamp DESC;"
+  db.any(most_recent)
+    .then(function(data) {
+      var fileName = './base_dataset_muninn.json';
+      var file = require(fileName);
+
+      var i = 0;
+      var x = 0;
+      var index;
+      for (i = 0; i < 35; i++){
+          flag = true;
+          while(flag){
+              if (file.features[x].properties.building != null){
+                  index = getBuildingSpeed(file.features[x].properties.building, most_recent);
+
+                  if(index != -1){
+                      file.features[x].properties.download = most_recent[0][index];
+                  }
+
+                  else{
+                      file.features[x].properties.download = 50;
+                  }
+
+                  fs.writeFile(fileName, JSON.stringify(file), function (err) {
+                      if (err) return console.log(err);
+                  });
+
+                  flag = false;
+                  x+=1;
+              }
+              else{
+                  x += 1;
+              }
+          }
+      }
+      res.sendFile(path.join(__dirname + '/base_dataset_muninn.json'));
+    })
+    .catch(function(error) {
+      console.log(error);
+      res.sendFile(path.join(__dirname + '/base_dataset_muninn.json'));
+    });
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
