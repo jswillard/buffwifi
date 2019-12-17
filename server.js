@@ -72,7 +72,7 @@ app.get('/results', function(req, res) {
   var date = (now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear();
   var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-  //db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
+  db.none('INSERT INTO speedtests (upload, download, ping, time_stamp, location) VALUES ($1, $2, $3, NOW(), $4)', [upload, download, ping, loc]);
 
   var query_best = "SELECT location, download as download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download DESC LIMIT 3;";
   var query_worst = "SELECT location, download as download FROM (SELECT DISTINCT ON (location) * FROM speedtests ORDER BY location, time_stamp DESC) t ORDER BY download LIMIT 3;";
