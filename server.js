@@ -118,7 +118,7 @@ app.get('/chart', function(req, res) {
 app.get('/data', function(req, res) {
   var most_recent = "SELECT location, download FROM\
       (SELECT DISTINCT ON (location) * \
-      FROM location_data \
+      FROM speedtests \
       ORDER BY location, time_stamp DESC) t \
       ORDER BY time_stamp DESC;"
   db.any(most_recent)
