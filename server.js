@@ -135,7 +135,7 @@ app.get('/map', function(req, res) {
                   index = getBuildingSpeed(file.features[x].properties.building, most_recent);
 
                   if(index != -1){
-                      file.features[x].properties.download = most_recent[0][index];
+                      file.features[x].properties.download = most_recent[0][index].download;
                   }
 
                   else{
